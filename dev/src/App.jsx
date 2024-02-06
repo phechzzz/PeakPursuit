@@ -1,35 +1,25 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from 'react';
+import NavBar  from './components/NavBar';
+import Profile  from './components/Profile';
+import Friends  from './components/Friends';
+import Log  from './components/Log';
+import Cals from './components/Cals';
+import './app.css';
 
 function App() {
-  const [count, setCount] = useState(0)
+  // Redirect user to auth page if not signed in
+  // { auth }
+  // If the user is signed in, display the home page
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <nav><NavBar /></nav>
+      <div className='profileHome'><Profile /></div>
+      <div className='friendsHome'><Friends /></div>
+      <div className='logHome'><Log /></div>
+      <div className='calsHome'><Cals /></div>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
