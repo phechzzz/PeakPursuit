@@ -5,7 +5,6 @@ import Navbar  from './components/NavBar';
 // import Friends  from './components/Friends';
 // import Log  from './components/Log';
 //import Cals from './components/Cals';
-import './app.css';
 import {
   ApolloClient,
   InMemoryCache,
