@@ -1,30 +1,18 @@
 {
-  "dependencies": {
-    "@headlessui/react": "^1.7.18",
-    "@heroicons/react": "^2.1.1",
-    "apollo-server-express": "^3.13.0",
-    "bcrypt": "^5.1.1",
-    "express": "^4.18.2",
-    "graphql": "^16.8.1",
-    "mongoose": "^8.1.1",
-    "nodemon": "^3.0.3",
-    "tailwindcss": "^3.4.1"
-  },
-  "name": "peakpursuit",
-  "description": "The fitness tracker app allows users to log exercise, set personal fitness goals, and track progress over time. Users can connect with each other to chat, see each others activity, and see each others goals.",
+  "name": "tech-matchup-app",
   "version": "1.0.0",
-  "main": "index.js",
+  "description": "",
+  "main": "server/server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/phechzzz/PeakPursuit.git"
+    "start": "node server/server.js --ignore client",
+    "develop": "concurrently \"cd server && npm run watch\" \"cd client && npm run dev\"",
+    "install": "cd server && npm i && cd ../client && npm i",
+    "seed": "cd server && npm run seed",
+    "build": "cd client && npm run build"
   },
   "author": "",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/phechzzz/PeakPursuit/issues"
-  },
-  "homepage": "https://github.com/phechzzz/PeakPursuit#readme"
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^5.3.0"
+  }
 }
