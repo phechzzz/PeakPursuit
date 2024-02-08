@@ -1,3 +1,4 @@
+
 const mongoose = require('mongoose');
 
 // Define mongoose schemas
@@ -32,3 +33,4 @@ module.exports = {
   Activity,
   Goal,
 };
+

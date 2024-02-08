@@ -1,3 +1,4 @@
+
 const typeDefs = `
   type User {
     id: ID!
@@ -33,3 +34,4 @@ const typeDefs = `
 `;
 
 module.exports = typeDefs;
+

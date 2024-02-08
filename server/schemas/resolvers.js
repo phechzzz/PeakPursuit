@@ -1,3 +1,4 @@
+
 const { User, Activity, Goal } = require('../models');
 
 const resolvers = {
@@ -72,3 +73,4 @@ const resolvers = {
 };
 
 module.exports = resolvers;
+
