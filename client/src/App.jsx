@@ -1,24 +1,48 @@
 import { useState } from 'react';
-import NavBar  from './components/NavBar';
-import Profile  from './components/Profile';
-import Friends  from './components/Friends';
-import Log  from './components/Log';
-import Cals from './components/Cals';
+import {Outlet} from 'react-router-dom';
+import Navbar  from './components/NavBar';
+//import Profile  from './components/Profile';
+// import Friends  from './components/Friends';
+// import Log  from './components/Log';
+//import Cals from './components/Cals';
 import './app.css';
+import {
+  ApolloClient,
+  InMemoryCache,
+  ApolloProvider,
+  createHttpLink,
+} from '@apollo/client';
+
+// Construct our main GraphQL API endpoint
+const httpLink = createHttpLink({
+  uri: '/graphql',
+});
+
+// Construct request middleware that will attach the JWT token to every request as an `authorization` header
+const authLink = setContext((_, { headers }) => {
+  // get the authentication token from local storage if it exists
+  const token = localStorage.getItem('id_token');
+  // return the headers to the context so httpLink can read them
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `Bearer ${token}` : '',
+    },
+  };
+});
+
+const client = new ApolloClient({
+  // Set up our client to execute the `authLink` middleware prior to making the request to our GraphQL API
+  link: authLink.concat(httpLink),
+  cache: new InMemoryCache(),
+});
 
 function App() {
-  // Redirect user to auth page if not signed in
-  // { auth }
-  // If the user is signed in, display the home page
-
   return (
-    <>
-      <nav><NavBar /></nav>
-      <div className='profileHome'><Profile /></div>
-      <div className='friendsHome'><Friends /></div>
-      <div className='logHome'><Log /></div>
-      <div className='calsHome'><Cals /></div>
-    </>
+    <ApolloProvider client={client}>
+      <Navbar />
+      <Outlet />
+    </ApolloProvider>
   );
 }
 
