@@ -29,16 +29,17 @@ class AuthService {
     return decode(this.getToken());
   }
 
-  // Checks if a token is expired
-  isTokenExpired(token) {
-    try {
-      const decoded = decode(token);
-      return decoded.exp < Date.now() / 1000;
-    } catch (err) {
-      // Consider logging this error or handling it further
-      return true;
-    }
+ // Checks if a token is expired
+isTokenExpired(token) {
+  try {
+    const decoded = decode(token);
+    return decoded.exp < Date.now() / 1000;
+  } catch (err) {
+    // Log the error
+    console.error("Error decoding token in isTokenExpired:", err.message);
+    return true; // Assume the token is expired if it cannot be decoded
   }
+}
 
   // Optionally, a method to update the token stored in localStorage
   updateToken(idToken) {
