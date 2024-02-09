@@ -1,55 +1,45 @@
-const { GraphQLError } = require('graphql');
-const jwt = require('jsonwebtoken');
+import decode from 'jwt-decode';
 
-// Assuming SECRET is defined in your environment variables
-const secret = process.env.SECRET;
-const expiration = '1h';
+class AuthService {
+  getProfile() {
+    return decode(this.getToken());
+  }
 
-module.exports = {
-  authMiddleware: function ({ req }) {
-    // Token can be sent via req.body, req.query, or headers
-    let token = req.body.token || req.query.token || req.headers.authorization;
+  loggedIn() {
+    // Checks if there is a saved token and it's still valid
+    const token = this.getToken();
+    return !!token && !this.isTokenExpired(token);
+  }
 
-    // Extract token if it's sent as "Bearer <tokenvalue>"
-    if (req.headers.authorization) {
-      token = token.split(' ').pop().trim();
-    }
-
-    // Proceed without user data if no token is found
-    if (!token) {
-      return req;
-    }
-
-    // Verify token and attach user data to request
+  isTokenExpired(token) {
     try {
-      // Note: jwt.verify does not support a 'maxAge' option. 'expiresIn' is used at the time of signing.
-      const { data } = jwt.verify(token, secret);
-      req.user = data;
-    } catch (error) {
-      // Log the error internally but do not send error details to client to avoid leaking security details
-      console.error('Authentication token is invalid:', error.message);
-      // Optionally attach error details in development mode
-      if (process.env.NODE_ENV === 'development') {
-        req.authError = error.message;
-      }
+      const decoded = decode(token);
+      if (decoded.exp < Date.now() / 1000) {
+        return true;
+      } else return false;
+    } catch (err) {
+      return false;
     }
+  }
 
-    return req;
-  },
+  getToken() {
+    // Retrieves the user token from localStorage
+    return localStorage.getItem('id_token');
+  }
 
-  signToken: function ({ firstName, email, _id }) {
-    const payload = { firstName, email, _id };
+  login(idToken) {
+    // Saves user token to localStorage
+    localStorage.setItem('id_token', idToken);
 
-    // Sign and return the token with user data
-    return jwt.sign({ data: payload }, secret, { expiresIn: expiration });
-  },
+    window.location.assign('/');
+  }
 
-  // Create a standardized GraphQL error for authentication issues
-  authenticationError: function(message = 'Could not authenticate user.') {
-    return new GraphQLError(message, {
-      extensions: {
-        code: 'UNAUTHENTICATED',
-      },
-    });
-  },
-};
+  logout() {
+    // Clear user token and profile data from localStorage
+    localStorage.removeItem('id_token');
+    // this will reload the page and reset the state of the application
+    window.location.assign('/');
+  }
+}
+
+export default new AuthService();
