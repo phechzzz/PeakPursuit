@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const activitySchema = new mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'User', // Reference to the User model
+    ref: 'User',
     required: true
   },
   type: {
@@ -14,11 +14,13 @@ const activitySchema = new mongoose.Schema({
   },
   distance: {
     type: Number,
-    required: true
+    required: true,
+    min: [0, 'Distance cannot be negative'],
   },
   time: {
     type: Number, // Assuming time is in minutes
-    required: true
+    required: true,
+    min: [0, 'Time cannot be negative'],
   },
   date: {
     type: Date,
@@ -26,6 +28,6 @@ const activitySchema = new mongoose.Schema({
   }
 });
 
-// Create and export Activity model
+// Create and export the Activity model
 const Activity = mongoose.model('Activity', activitySchema);
 module.exports = Activity;
