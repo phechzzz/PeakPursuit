@@ -16,6 +16,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  
   activities: [
     {
       type: mongoose.Schema.Types.ObjectId,
