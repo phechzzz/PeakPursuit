@@ -1,5 +1,6 @@
 
 const { User, Activity, Goal } = require('../models');
+const { signToken, AuthenticationError } = require('../utils/auth');
 
 const resolvers = {
   Query: {
@@ -26,11 +27,12 @@ const resolvers = {
     },
   },
   Mutation: {
-    createUser: async (_, { username, email }) => {
+    createUser: async (_, { username, email, password }) => {
       try {
-        const user = new User({ username, email });
-        await user.save();
-        return user;
+        const user = await User.create({ username, email, password });
+        //await user.save();
+        const token = signToken(user);
+      return { token, user };
       } catch (error) {
         throw new Error('Failed to create user');
       }
