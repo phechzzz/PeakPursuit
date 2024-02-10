@@ -1,32 +1,33 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import Auth from '../utils/auth';
-import { CREATE_USER} from '../utils/mutations';
+import { CREATE_USER } from '../utils/mutations';
 
 function SignUp(props) {
-  const [formState, setFormState] = useState({ email: '', password: '' });
+  const [formState, setFormState] = useState({ username: '', email: '', password: '' });
   const [addUser] = useMutation(CREATE_USER);
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    const mutationResponse = await addUser({
-      variables: {
-        email: formState.email,
-        password: formState.password,
-        firstName: formState.firstName,
-        lastName: formState.lastName,
-      },
-    });
-    const token = mutationResponse.data.addUser.token;
-    Auth.login(token);
+    console.log (formState);
+    try {
+      const { data } = await addUser({
+        variables: { ...formState }
+      });
+      const token = data.createUser.token;
+      console.log (data)
+      Auth.login(token);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormState({
       ...formState,
-      [name]: value,
+      [name]: value
     });
   };
 
@@ -37,22 +38,13 @@ function SignUp(props) {
       <h2>Signup</h2>
       <form onSubmit={handleFormSubmit}>
         <div className="flex-row space-between my-2">
-          <label htmlFor="firstName">First Name:</label>
+          <label htmlFor="username">Username:</label>
           <input
-            placeholder="First"
-            name="firstName"
-            type="firstName"
-            id="firstName"
-            onChange={handleChange}
-          />
-        </div>
-        <div className="flex-row space-between my-2">
-          <label htmlFor="lastName">Last Name:</label>
-          <input
-            placeholder="Last"
-            name="lastName"
-            type="lastName"
-            id="lastName"
+            placeholder="Username"
+            name="username"
+            type="text"
+            id="username"
+            value={formState.username}
             onChange={handleChange}
           />
         </div>
@@ -63,6 +55,7 @@ function SignUp(props) {
             name="email"
             type="email"
             id="email"
+            value={formState.email}
             onChange={handleChange}
           />
         </div>
@@ -73,6 +66,7 @@ function SignUp(props) {
             name="password"
             type="password"
             id="pwd"
+            value={formState.password}
             onChange={handleChange}
           />
         </div>
