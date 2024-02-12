@@ -6,20 +6,21 @@ import { CREATE_USER } from '../utils/mutations';
 
 function SignUp(props) {
   const [formState, setFormState] = useState({ username: '', email: '', password: '' });
-  const [addUser] = useMutation(CREATE_USER);
+  const [addUser, {error}] = useMutation(CREATE_USER);
+  const [errorMessage, setErrorMessage] = useState('');
+
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    console.log(formState);
     try {
       const { data } = await addUser({
         variables: { ...formState }
       });
       const token = data.createUser.token;
-      console.log(data);
       Auth.login(token);
     } catch (error) {
       console.error(error);
+      setErrorMessage('Oops! Username/email already in use');
     }
   };
 
@@ -70,6 +71,9 @@ function SignUp(props) {
             onChange={handleChange}
           />
         </div>
+        {error && (
+          <div className="text-red-500">{errorMessage}</div>
+        )}
         <div className="flex-row flex-end">
           <button type="submit">Submit</button>
         </div>
