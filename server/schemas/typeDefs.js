@@ -1,23 +1,29 @@
 
 const typeDefs = `
   type User {
-    id: ID!
-    username: String!
-    email: String!
-    activities: [Activity]!
-    goals: [Goal]!
+    _id: ID
+    username: String
+    email: String
+    password: String
+    activities: [Activity]
+    goals: [Goal]
   }
 
   type Activity {
-    id: ID!
+    _id: ID!
     name: String!
     user: User!
   }
 
   type Goal {
-    id: ID!
+    _id: ID!
     target: String!
     user: User!
+  }
+
+  type Auth {
+    token: ID!
+    user: User
   }
 
   type Query {
@@ -27,7 +33,8 @@ const typeDefs = `
   }
 
   type Mutation {
-    createUser(username: String!, email: String!): User
+    createUser(username: String!, email: String!, password: String!): Auth
+    login(email: String!, password: String!): Auth
     createActivity(userId: ID!, name: String!): Activity
     createGoal(userId: ID!, target: String!): Goal
   }

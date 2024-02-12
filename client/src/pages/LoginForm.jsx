@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { Link } from 'react-router-dom';
 import { LOGIN_USER } from '../utils/mutations';
 import Auth from '../utils/auth';
+import Home from './Home'; // Import the Home component
 
 function Login(props) {
   const [formState, setFormState] = useState({ email: '', password: '' });
@@ -11,10 +12,10 @@ function Login(props) {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     try {
-      const mutationResponse = await login({
-        variables: { email: formState.email, password: formState.password },
+      const { data } = await login({
+        variables: { ...formState },
       });
-      const token = mutationResponse.data.login.token;
+      const token = data.login.token;
       Auth.login(token);
     } catch (e) {
       console.log(e);
@@ -29,11 +30,17 @@ function Login(props) {
     });
   };
 
+  // Check if the user is logged in and render the Home component if they are
+  if (Auth.loggedIn()) {
+    return <Home />;
+  }
+
   return (
     <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-
       <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Login</h2>
-      <form  className="space-y-6" onSubmit={handleFormSubmit}>
+      <form className="space-y-6" onSubmit={handleFormSubmit}>
+        {/* Your form inputs */}
+        {/* Error message display */}
         <div>
           <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">Email address:</label>
           <div className="mt-2">
@@ -48,21 +55,21 @@ function Login(props) {
           </div>
         </div>
         <div className="mt-2">
-          <label htmlFor="pwd" className="block text-sm font-medium leading-6 text-gray-900">Password:</label>
+          <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900">Password:</label>
           <input
             placeholder="******"
             name="password"
             type="password"
-            id="pwd"
+            id="password"
             onChange={handleChange}
-            class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
           />
         </div>
-        {error ? (
+        {error && (
           <div>
             <p className="error-text">The provided credentials are incorrect</p>
           </div>
-        ) : null}
+        )}
         <div className="flex-row flex-end">
           <button type="submit" className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Submit</button>
         </div>

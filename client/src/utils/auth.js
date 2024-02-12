@@ -15,8 +15,9 @@ class AuthService {
   // Clears user token from localStorage and redirects to home
   logout() {
     localStorage.removeItem('id_token');
-    window.location.assign('/');
+    window.location.reload();
   }
+
 
   // Checks if the user is currently logged in
   loggedIn() {

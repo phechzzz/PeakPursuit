@@ -10,4 +10,6 @@ module.exports = {
   User,
   Activity,
   Goal
+
 };
+
