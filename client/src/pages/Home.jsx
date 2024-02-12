@@ -1,19 +1,36 @@
-import Navbar  from './components/NavBar';
-import Profile  from './components/Profile';
-import Friends  from './components/Friends';
-import Log  from './components/Log';
-import Cals from './components/Cals';
+import Navbar  from '../components/NavBar';
+import Profile  from '../components/Profile';
+import Friends  from '../components/Friends';
+import Log  from '../components/Log';
+import Cals from '../components/Cals';
 
 const Home = () => {
     return (
-        <>
+      <>
         <Navbar />
-        <h1>Hello This is Our Project 3!</h1>
-        <Profile />
-        <Friends />
-        <Log />
-        <Cals />
-        </>
+        <div className="container mx-auto max-h-screen overflow-hidden">
+          <div className="flex h-full">
+            {/* Left column */}
+            <div className="flex-1 mr-4 overflow-y-auto">
+              <div className="mb-4">
+                <Profile />
+              </div>
+              <div>
+                <Friends />
+              </div>
+            </div>
+            {/* Middle column */}
+            <div className="flex-1 mx-4 overflow-y-auto">
+              <Cals />
+            </div>
+            {/* Right column */}
+            <div className="flex-1 ml-4 overflow-y-auto">
+              <Log />
+            </div>
+          </div>
+        </div>
+      </>
     );
   };
+  
   export default Home;

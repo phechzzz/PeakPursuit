@@ -1,10 +1,7 @@
 import { useState } from 'react';
 import {Outlet} from 'react-router-dom';
 import Navbar  from './components/NavBar';
-//import Profile  from './components/Profile';
-// import Friends  from './components/Friends';
-// import Log  from './components/Log';
-//import Cals from './components/Cals';
+
 import {
   ApolloClient,
   InMemoryCache,
