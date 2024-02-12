@@ -37,6 +37,23 @@ const resolvers = {
         throw new Error('Failed to create user');
       }
     },
+    login: async (parent, { email, password }) => {
+      const user = await User.findOne({ email });
+
+      if (!user) {
+        throw AuthenticationError;
+      }
+
+      // const correctPw = await user.isCorrectPassword(password);
+
+      // if (!correctPw) {
+      //   throw AuthenticationError;
+      // }
+
+      const token = signToken(user);
+
+      return { token, user };
+    },
     createActivity: async (_, { userId, name }) => {
       try {
         const activity = new Activity({ userId, name });
