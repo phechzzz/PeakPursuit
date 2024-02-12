@@ -9,10 +9,13 @@ const goalSchema = new mongoose.Schema({
   },
   title: {
     type: String,
-    required: true
+    required: true, 
+    minlength: 1, 
+    maxlength: 100
   },
   description: {
-    type: String
+    type: String,
+    maxlength: 500 
   },
   deadline: {
     type: Date,
