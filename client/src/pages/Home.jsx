@@ -2,7 +2,7 @@ import Navbar  from '../components/NavBar';
 import Profile  from '../components/Profile';
 import Friends  from '../components/Friends';
 import Log  from '../components/Log';
-import Cals from '../components/Cals';
+import Goal from '../components/Goal';
 
 const Home = () => {
     return (
@@ -21,7 +21,7 @@ const Home = () => {
             </div>
             {/* Middle column */}
             <div className="flex-1 mx-4 overflow-y-auto">
-              <Cals />
+              <Goal />
             </div>
             {/* Right column */}
             <div className="flex-1 ml-4 overflow-y-auto">
