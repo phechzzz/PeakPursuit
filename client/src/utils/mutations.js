@@ -33,10 +33,13 @@ mutation CreateUser($username: String!, $email: String!, $password: String!) {
 
 // Mutation to create a new activity
 export const CREATE_ACTIVITY = gql`
-  mutation CreateActivity($userId: ID!, $name: String!) {
-    createActivity(userId: $userId, name: $name) {
-      id
-      name
+  mutation createActivity($type: String!, $distance: String, $time: String, $user:String) {
+    createActivity(type: $type, distance: $distance, time: $time, user: $user) {
+      _id
+      user{_id}
+      type
+      distance
+      time
     }
   }
 `;

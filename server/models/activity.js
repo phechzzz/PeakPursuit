@@ -5,7 +5,6 @@ const activitySchema = new mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
-    required: true
   },
   type: {
     type: String,
@@ -13,19 +12,16 @@ const activitySchema = new mongoose.Schema({
     required: true
   },
   distance: {
-    type: Number,
+    type: String,
     required: true,
     min: [0, 'Distance cannot be negative'],
   },
   time: {
-    type: Number, // Assuming time is in minutes
+    type: String, // Assuming time is in minutes
     required: true,
     min: [0, 'Time cannot be negative'],
   },
-  date: {
-    type: Date,
-    default: Date.now
-  }
+  
 });
 
 // Create and export the Activity model
