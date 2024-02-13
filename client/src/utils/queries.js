@@ -4,37 +4,38 @@ import { gql } from '@apollo/client';
 export const GET_USER = gql`
   query GetUser($id: ID!) {
     getUser(id: $id) {
-      id
+      _id
       username
       email
       activities {
-        id
-        name
+        _id
       }
       goals {
-        id
+        _id
         target
       }
     }
   }
 `;
 
-// Query to fetch activities by user ID
-export const GET_ACTIVITIES = gql`
-  query GetActivities($userId: ID!) {
-    getActivities(userId: $userId) {
-      id
-      name
-    }
-  }
-`;
 
-// Query to fetch goals by user ID
-export const GET_GOALS = gql`
-  query GetGoals($userId: ID!) {
-    getGoals(userId: $userId) {
-      id
-      target
-    }
-  }
-`;
+
+// Query to fetch activities by user ID
+// export const GET_ACTIVITIES = gql`
+//   query GetActivities($userId: ID!) {
+//     getActivities(userId: $userId) {
+//       _id
+//       name
+//     }
+//   }
+// `;
+
+// // Query to fetch goals by user ID
+// export const GET_GOALS = gql`
+//   query GetGoals($userId: ID!) {
+//     getGoals(userId: $userId) {
+//       _id
+//       target
+//     }
+//   }
+// `;

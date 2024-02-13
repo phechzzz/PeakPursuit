@@ -26,6 +26,8 @@ const resolvers = {
       }
     },
   },
+    
+  
   Mutation: {
     createUser: async (_, { username, email, password }) => {
       try {
@@ -54,12 +56,39 @@ const resolvers = {
 
       return { token, user };
     },
-    createActivity: async (_, { userId, name }) => {
+    createActivity: async (_, args, context) => {
       try {
-        const activity = new Activity({ userId, name });
+        // Ensure user is authenticated
+        if (!context.user) {
+          throw new Error('Authentication required');
+        }
+    
+        // Extract input data
+        const { type, distance, time } = args;
+    
+        // Create a new activity instance
+        const activity = new Activity({
+          user: context.user._id, // Assign the user ID from the context
+          type,
+          distance,
+          time
+        });
+    
+        // Save the activity to the database
         await activity.save();
+    
+        // Find the user in the database and update their activities array
+        const user = await User.findById(context.user._id);
+        if (!user) {
+          throw new Error('User not found');
+        }
+        user.activities.push(activity._id); // Assuming activities is an array of activity IDs
+        await user.save();
+    
+        // Return the created activity
         return activity;
       } catch (error) {
+        console.error('Failed to create activity:', error);
         throw new Error('Failed to create activity');
       }
     },
