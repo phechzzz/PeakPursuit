@@ -1,3 +1,5 @@
+import React from 'react';
+import { Link } from 'react-router-dom';
 import Navbar from '../components/NavBar';
 import Profile from '../components/Profile';
 import Friends from '../components/Friends';
@@ -22,8 +24,9 @@ const Home = () => {
             </div>
             {/* Right column */}
             <div className="flex-1 ml-4 overflow-y-auto flex flex-col">
-              <div className="mb-4 shadow-lg rounded-lg bg-white m-4">
-                <Goal />
+              <div className="flex-1 mx-4 overflow-y-auto">
+                {/* Use the Link component here for navigation */}
+                <Link className="nutrition-link" to="/exercises">Exercises &nbsp;&nbsp;</Link>
               </div>
               <div className="shadow-lg rounded-lg bg-white m-4">
                 <Log />
