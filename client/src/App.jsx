@@ -1,6 +1,9 @@
-import { useState } from 'react';
-import {Outlet} from 'react-router-dom';
-import Navbar  from './components/NavBar';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Home from './pages/Home';
+import Exercises from './pages/Exercises';
+// Import other components/pages
+import Navbar from './components/NavBar';
 
 import {
   ApolloClient,
@@ -8,7 +11,7 @@ import {
   ApolloProvider,
   createHttpLink,
 } from '@apollo/client';
-import {setContext} from '@apollo/client/link/context'
+import { setContext } from '@apollo/client/link/context';
 
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
@@ -37,7 +40,14 @@ const client = new ApolloClient({
 function App() {
   return (
     <ApolloProvider client={client}>
-      <Outlet />
+      <Router>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/exercises" element={<Exercises />} />
+          {/* Define other routes */}
+        </Routes>
+      </Router>
     </ApolloProvider>
   );
 }
