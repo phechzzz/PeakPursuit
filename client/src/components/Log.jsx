@@ -4,7 +4,18 @@ import { GET_USER } from '../utils/queries';
 import { CREATE_ACTIVITY } from '../utils/mutations';
 
 const Log = () => {
-  const [exerciseLog, setExerciseLog] = useState([]);
+  const [exerciseLog, setExerciseLog] = useState([
+    {
+      name: 'Running',
+      time: '1 hour',
+      distance: '10 miles',
+    },
+    {
+      name: 'Biking',
+      time: '30 minutes',
+      distance: '5 miles',
+    },
+  ]);
   const [showForm, setShowForm] = useState(false);
   const [newExercise, setNewExercise] = useState({
     type: 'run',
@@ -57,16 +68,16 @@ const Log = () => {
   };
 
   return (
-    <>
-      <label htmlFor="price" className="block text-lg font-medium leading-6 text-gray-900">
-        Exercise Log
+    <div className="mt-8">
+      <label htmlFor="price" className="block text-2xl font-medium leading-6 text-gray-900 text-center mb-4">
+        EXERCISE LOG
       </label>
-      <button onClick={toggleForm} className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600">
-        {showForm ? 'Hide Form' : 'Add Exercise'}
+      <button onClick={toggleForm} className="mt-4 px-4 py-2 bg-purple-500 text-white rounded-md hover:bg-purple-600 focus:outline-none focus:bg-purple-600 flex items-center mx-auto">
+        <span className="text-xl font-semibold">+</span>
+        <span className="ml-2"></span>
       </button>
-
       {showForm && (
-        <form onSubmit={addExercise} className="mt-4">
+        <form onSubmit={addExercise} className="mt-4 flex justify-center">
           <div className="flex space-x-4">
             <select name="type" value={newExercise.type} onChange={handleChange} className="form-select">
               <option value="run">Run</option>
@@ -97,20 +108,21 @@ const Log = () => {
         </form>
       )}
       <ul role="list" className="mt-4 divide-y divide-gray-100 max-h-[calc(100vh-200px)] overflow-y-auto">
-
         {exerciseLog.map((exercise, index) => (
-          <li key={index} className="flex justify-between gap-x-6 py-5">
+          <li key={index} className="flex justify-between gap-x-6 py-5 bg-purple-100 shadow-md p-4 rounded-md mb-4 mx-4">
             <div className="flex min-w-0 gap-x-4">
               <div className="min-w-0 flex-auto">
-                <p className="text-sm font-semibold leading-6 text-gray-900">{exercise.name}</p>
-                <p className="mt-1 truncate text-xs leading-5 text-gray-500">{exercise.time}</p>
-                <p className="mt-1 truncate text-xs leading-5 text-gray-500">{exercise.distance}</p>
+                <p className="text-lg font-semibold leading-6 text-gray-900">{exercise.name}</p>
+                <div className="mt-2">
+                  <p className="text-sm leading-5 text-gray-500"><span className="font-semibold">Time:</span> {exercise.time}</p>
+                  <p className="text-sm leading-5 text-gray-500"><span className="font-semibold">Distance:</span> {exercise.distance}</p>
+                </div>
               </div>
             </div>
           </li>
         ))}
       </ul>
-    </>
+    </div>
   );
 };
 
