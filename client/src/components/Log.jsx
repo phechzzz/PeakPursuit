@@ -64,6 +64,7 @@ const Log = () => {
       <button onClick={toggleForm} className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600">
         {showForm ? 'Hide Form' : 'Add Exercise'}
       </button>
+
       {showForm && (
         <form onSubmit={addExercise} className="mt-4">
           <div className="flex space-x-4">
@@ -96,6 +97,7 @@ const Log = () => {
         </form>
       )}
       <ul role="list" className="mt-4 divide-y divide-gray-100 max-h-[calc(100vh-200px)] overflow-y-auto">
+
         {exerciseLog.map((exercise, index) => (
           <li key={index} className="flex justify-between gap-x-6 py-5">
             <div className="flex min-w-0 gap-x-4">
