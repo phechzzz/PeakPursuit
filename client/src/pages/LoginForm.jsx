@@ -37,6 +37,7 @@ function Login(props) {
 
   return (
     <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+      <h1 className="text-6xl text-purple-600 font-bold text-center">PeakPursuit</h1>
       <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Login</h2>
       <form className="space-y-6" onSubmit={handleFormSubmit}>
         {/* Your form inputs */}
