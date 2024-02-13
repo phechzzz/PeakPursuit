@@ -69,13 +69,13 @@ const people = [
     return (
       <div>
         <h3 className="text-lg font-semibold mb-2">Friends:</h3>
-        <button onClick={addFriend} className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md focus:outline-none focus:bg-blue-600">
+        <button onClick={addFriend} className="bg-purple-500 hover:bg-purple-600 text-white px-4 py-2 rounded-md focus:outline-none focus:bg-purple-600">
           Add Friend
         </button>
         <div className="max-h-[calc(50vh-120px)] overflow-y-auto">
           <ul className="divide-y divide-gray-100">
             {friends.map((person, index) => (
-              <li key={index} className="flex justify-between gap-x-6 py-5">
+              <li key={index} className="flex justify-between gap-x-6 py-5 rounded-lg border border-gray-200" style={{ boxShadow: '0 0 5px rgba(0, 0, 0, 0.1)' }}>
                 <div className="flex min-w-0 gap-x-4">
                   <img className="h-12 w-12 flex-none rounded-full bg-gray-50" src={person.imageUrl} alt="" />
                   <div className="min-w-0 flex-auto">
