@@ -68,61 +68,61 @@ const Log = () => {
   };
 
   return (
-    <div className="mt-8">
-      <label htmlFor="price" className="block text-2xl font-medium leading-6 text-gray-900 text-center mb-4">
-        EXERCISE LOG
-      </label>
-      <button onClick={toggleForm} className="mt-4 px-4 py-2 bg-purple-500 text-white rounded-md hover:bg-purple-600 focus:outline-none focus:bg-purple-600 flex items-center mx-auto">
-        <span className="text-xl font-semibold">+</span>
-        <span className="ml-2"></span>
-      </button>
-      {showForm && (
-        <form onSubmit={addExercise} className="mt-4 flex justify-center">
-          <div className="flex space-x-4">
-            <select name="type" value={newExercise.type} onChange={handleChange} className="form-select">
-              <option value="run">Run</option>
-              <option value="walk">Walk</option>
-              <option value="bike">Bike</option>
-              <option value="swim">Swim</option>
-            </select>
-            <input
-              type="text"
-              name="distance"
-              placeholder="Distance"
-              value={newExercise.distance}
-              onChange={handleChange}
-              className="form-input"
-            />
-            <input
-              type="text"
-              name="time"
-              placeholder="Time"
-              value={newExercise.time}
-              onChange={handleChange}
-              className="form-input"
-            />
-            <button type="submit" className="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 focus:outline-none focus:bg-green-600">
-              Add
-            </button>
-          </div>
-        </form>
-      )}
-      <ul role="list" className="mt-4 divide-y divide-gray-100 max-h-[calc(100vh-200px)] overflow-y-auto">
-        {exerciseLog.map((exercise, index) => (
-          <li key={index} className="flex justify-between gap-x-6 py-5 bg-purple-100 shadow-md p-4 rounded-md mb-4 mx-4">
-            <div className="flex min-w-0 gap-x-4">
-              <div className="min-w-0 flex-auto">
-                <p className="text-lg font-semibold leading-6 text-gray-900">{exercise.name}</p>
-                <div className="mt-2">
-                  <p className="text-sm leading-5 text-gray-500"><span className="font-semibold">Time:</span> {exercise.time}</p>
-                  <p className="text-sm leading-5 text-gray-500"><span className="font-semibold">Distance:</span> {exercise.distance}</p>
-                </div>
-              </div>
+    <div className="flex flex-col items-center pb-4 mb-4">
+  <label htmlFor="price" className="block text-2xl font-medium leading-6 text-gray-900 mt-4 font-montserrat text-center">
+    EXERCISE LOG
+  </label>
+  <button onClick={toggleForm} className="mt-2 px-3 py-1 bg-purple-500 text-white rounded-md hover:bg-purple-600 focus:outline-none focus:bg-purple-600 flex items-center justify-center">
+    <span className="text-xl font-semibold">+</span>
+  </button>
+  {showForm && (
+    <form onSubmit={addExercise} className="mt-4 flex flex-col items-center">
+      <div className="flex space-x-4">
+        <select name="type" value={newExercise.type} onChange={handleChange} className="form-select px-3 py-1 bg-white border border-gray-300 rounded-md text-sm focus:outline-none focus:border-purple-500">
+          <option value="run">Run</option>
+          <option value="walk">Walk</option>
+          <option value="bike">Bike</option>
+          <option value="swim">Swim</option>
+        </select>
+        <input
+          type="text"
+          name="distance"
+          placeholder="Distance"
+          value={newExercise.distance}
+          onChange={handleChange}
+          className="form-input px-3 py-1 bg-white border border-gray-300 rounded-md text-sm focus:outline-none focus:border-purple-500"
+        />
+        <input
+          type="text"
+          name="time"
+          placeholder="Time"
+          value={newExercise.time}
+          onChange={handleChange}
+          className="form-input px-3 py-1 bg-white border border-gray-300 rounded-md text-sm focus:outline-none focus:border-purple-500"
+        />
+        <button type="submit" className="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 focus:outline-none focus:bg-green-600">
+          Add
+        </button>
+      </div>
+    </form>
+  )}
+  <ul role="list" className="mt-4 divide-y divide-gray-100 max-h-[calc(100vh-200px)] overflow-y-auto w-full">
+    {exerciseLog.map((exercise, index) => (
+      <li key={index} className="flex justify-between items-center py-5 bg-purple-100 shadow-md rounded-md mb-4 mx-4">
+        <div className="flex gap-x-4 w-full">
+          <div className="flex-auto">
+            <p className="text-lg font-semibold leading-6 text-gray-900">{exercise.name}</p>
+            <div className="mt-2">
+              <p className="text-sm leading-5 text-gray-500"><span className="font-semibold">Time:</span> {exercise.time}</p>
+              <p className="text-sm leading-5 text-gray-500"><span className="font-semibold">Distance:</span> {exercise.distance}</p>
             </div>
-          </li>
-        ))}
-      </ul>
-    </div>
+          </div>
+        </div>
+      </li>
+    ))}
+  </ul>
+</div>
+
   );
 };
 

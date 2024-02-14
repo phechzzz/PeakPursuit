@@ -28,43 +28,48 @@ const ExerciseList = () => {
     const exercises = searchPerformed ? data?.getExercises || [] : [];
 
     return (
-        <div className="exerciseBg">
-            <div className="exerciseContainer">
-                <h1 className="exerciseHeader">Search Workouts</h1>
-                <div>
-                    <input
-                        className="exercise-input"
-                        type="text"
-                        placeholder="Enter a Muscle Group"
-                        value={muscle}
-                        onChange={handleInputChange}
-                    />
-                    <button className="exercise-btn" onClick={handleSearch}>
-                        Search
-                    </button>
-                    {/* Add a clear button */}
-                    <button className="exercise-btn" onClick={handleClearSearch}>
-                        Clear
-                    </button>
-                </div>
-                {exercises.length > 0 ? (
-                    <div className="exerciseList">
-                        {exercises.slice(0, 8).map((exercise) => (
-                            <div className="exercise-card" key={exercise.name}>
-                                <h3 className="exercise-title">{exercise.name}</h3>
-                                <p className="exercise-detail">Type: {exercise.type}</p>
-                                <p className="exercise-detail">Muscle: {exercise.muscle}</p>
-                                <p className="exercise-detail">Equipment: {exercise.equipment}</p>
-                                <p className="exercise-detail">Difficulty: {exercise.difficulty}</p>
-                                <p className="exercise-detail">Instructions: {exercise.instructions}</p>
-                            </div>
-                        ))}
-                    </div>
-                ) : searchPerformed && (
-                    <div className="exerciseList-no-results">No exercises found. Try a different search.</div>
-                )}
-            </div>
+        <div className="flex flex-col items-center pb-4 mb-4">
+    <div className="flex flex-col items-center">
+        <h1 className="block text-2xl font-medium leading-6 text-gray-900 mt-4 font-montserrat">Search Workouts</h1>
+        <div className="mt-2">
+            <input
+                className="form-input mt-2 px-3 py-1 bg-white border border-gray-300 rounded-md text-sm focus:outline-none focus:border-purple-500"
+                type="text"
+                placeholder="Enter a Muscle Group"
+                value={muscle}
+                onChange={handleInputChange}
+            />
+            <button
+                className="mt-2 px-3 py-1 bg-purple-500 text-white rounded-md hover:bg-purple-600 focus:outline-none focus:bg-purple-600 text-sm"
+                onClick={handleSearch}>
+                Search
+            </button>
+            {/* Add a clear button */}
+            <button
+                className="ml-2 px-3 py-1 bg-red-500 text-white rounded-md hover:bg-red-600 focus:outline-none focus:bg-red-600 text-sm"
+                onClick={handleClearSearch}>
+                X
+            </button>
         </div>
+        {exercises.length > 0 ? (
+            <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                {exercises.slice(0, 8).map((exercise) => (
+                    <div className="py-5 bg-white shadow-md" key={exercise.name}>
+                        <h3 className="text-sm font-semibold leading-6 text-gray-900">{exercise.name}</h3>
+                        <p className="mt-1 truncate text-xs leading-5 text-gray-500">Type: {exercise.type}</p>
+                        <p className="truncate text-xs leading-5 text-gray-500">Muscle: {exercise.muscle}</p>
+                        <p className="truncate text-xs leading-5 text-gray-500">Equipment: {exercise.equipment}</p>
+                        <p className="truncate text-xs leading-5 text-gray-500">Difficulty: {exercise.difficulty}</p>
+                        <p className="truncate text-xs leading-5 text-gray-500">Instructions: {exercise.instructions}</p>
+                    </div>
+                ))}
+            </div>
+        ) : searchPerformed && (
+            <div className="exerciseList-no-results text-sm font-semibold leading-6 text-gray-900 mt-4">No exercises found. Try a different search.</div>
+        )}
+    </div>
+</div>
+
     );
 };
 

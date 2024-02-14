@@ -2,3 +2,75 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
+/* .exerciseBg {
+  background-color: #f7f7f7; 
+  padding: 2rem 0;
+}
+  
+.exerciseContainer {
+  max-width: 800px; 
+  margin: 0 auto; 
+  padding: 0 1rem; 
+}
+
+.exerciseHeader {
+  color: #553C9A; 
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 2rem;
+}
+  
+.exercise-input, .exercise-btn {
+  padding: 0.5rem 1rem;
+  border: 1px solid #ccc;
+  margin: 0.5rem 0.25rem; 
+  border-radius: 0.375rem; 
+}
+  
+.exercise-input {
+  flex-grow: 1; 
+}
+  
+.exercise-btn {
+  background-color: #5a67d8; 
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s; 
+}
+  
+.exercise-btn:hover {
+  background-color: #44337A; 
+}
+  
+.exerciseList, .exerciseList-no-results {
+  margin-top: 2rem;
+}
+
+.exercise-card {
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
+  padding: 1rem;
+  border-radius: 0.375rem; 
+  margin-bottom: 1rem; 
+}
+
+.exercise-title {
+  color: #2d3748; 
+  margin-bottom: 0.5rem;
+}
+
+.exercise-detail {
+  color: #4a5568; 
+  font-size: 0.875rem; 
+}
+
+@media (max-width: 768px) {
+  .exerciseContainer {
+    padding: 0 0.5rem; 
+  }
+
+  .exercise-input, .exercise-btn {
+    width: 100%; 
+    margin: 0.25rem 0; 
+  }
+} */

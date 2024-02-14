@@ -1,10 +1,4 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Home from './pages/Home';
-import Exercises from './components/Exercises';
-// Import other components/pages
-import Navbar from './components/NavBar';
-
+import { Outlet } from 'react-router-dom';
 import {
   ApolloClient,
   InMemoryCache,
@@ -40,14 +34,7 @@ const client = new ApolloClient({
 function App() {
   return (
     <ApolloProvider client={client}>
-      {/* <Router> */}
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/exercises" element={<Exercises />} />
-          {/* Define other routes */}
-        </Routes>
-      {/* </Router> */}
+      <Outlet />
     </ApolloProvider>
   );
 }
