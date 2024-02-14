@@ -9,7 +9,7 @@ import Goal from '../components/Goal';
 const Home = () => {
   return (
     <>
-      <Navbar />
+      <Navbar /> {/* Render the NavBar component once */}
       <div className="h-screen bg-gray-100">
         <div className="container mx-auto h-full overflow-hidden">
           <div className="flex h-full">
@@ -24,8 +24,11 @@ const Home = () => {
             </div>
             {/* Right column */}
             <div className="flex-1 ml-4 overflow-y-auto flex flex-col">
-            <div className="mb-4 shadow-lg rounded-lg bg-white m-4">
+              <div className="mb-4 shadow-lg rounded-lg bg-white m-4">
                 <Exercises />
+              </div>
+              <div className="mb-4 shadow-lg rounded-lg bg-white m-4">
+                <Goal />
               </div>
               <div className="shadow-lg rounded-lg bg-white m-4">
                 <Log />
