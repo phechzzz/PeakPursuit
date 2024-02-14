@@ -28,10 +28,20 @@ const typeDefs = `
     user: User
   }
 
+  type Exercise {
+    name: String!
+    type: String!
+    muscle: String!
+    equipment: String!
+    difficulty: String!
+    instructions: String!
+  }
+
   type Query {
     getUser(id: ID!): User
     getActivities(userId: ID!): [Activity]
     getGoals(userId: ID!): [Goal]
+    getExercises(muscle: String!): [Exercise]
   }
 
   type Mutation {

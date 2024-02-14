@@ -1,6 +1,7 @@
 
 const { User, Activity, Goal } = require('../models');
 const { signToken, AuthenticationError } = require('../utils/auth');
+const axios = require('axios');
 
 const resolvers = {
   Query: {
@@ -23,6 +24,20 @@ const resolvers = {
         return await Goal.find({ userId });
       } catch (error) {
         throw new Error('Failed to fetch goals');
+      }
+    },
+    getExercises: async (_, { muscle }) => {
+      const apiKey = 'v9X8DLSBXiH/xYvpTnHuYA==jjbg4SH28sAAp638';
+      const url = `https://api.api-ninjas.com/v1/exercises?muscle=${muscle}`;
+    
+      try {
+        const response = await axios.get(url, {
+          headers: { 'X-Api-Key': apiKey },
+        });
+        return response.data; // Axios automatically parses the JSON response
+      } catch (error) {
+        console.error('Request failed:', error);
+        throw new Error('Failed to retrieve exercises');
       }
     },
   },

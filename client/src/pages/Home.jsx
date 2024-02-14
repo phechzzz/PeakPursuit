@@ -1,7 +1,9 @@
+import React from 'react';
 import Navbar from '../components/NavBar';
 import Profile from '../components/Profile';
 import Friends from '../components/Friends';
 import Log from '../components/Log';
+import Exercises from '../components/Exercises';
 import Goal from '../components/Goal';
 
 const Home = () => {
@@ -22,8 +24,8 @@ const Home = () => {
             </div>
             {/* Right column */}
             <div className="flex-1 ml-4 overflow-y-auto flex flex-col">
-              <div className="mb-4 shadow-lg rounded-lg bg-white m-4">
-                <Goal />
+            <div className="mb-4 shadow-lg rounded-lg bg-white m-4">
+                <Exercises />
               </div>
               <div className="shadow-lg rounded-lg bg-white m-4">
                 <Log />

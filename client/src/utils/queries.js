@@ -18,7 +18,18 @@ export const GET_USER = gql`
   }
 `;
 
-
+export const GET_EXERCISES = gql`
+  query exercisesByMuscle($muscle: String!) {
+    getExercises(muscle: $muscle) {
+      name
+      type
+      muscle
+      equipment
+      difficulty
+      instructions
+    }
+  }
+`;
 
 // Query to fetch activities by user ID
 // export const GET_ACTIVITIES = gql`
